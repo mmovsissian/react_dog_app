@@ -5,7 +5,7 @@ export default function Breeds(props) {
 
     return (
         <ul>
-            {props.array.map((dog) => <li>{dog}</li>)}
+            {props.array.map((dog, idx) => <li key={idx} onClick={() => props.onBreedsClick(dog)}>{dog}</li>)}
         </ul>
     )
 }
