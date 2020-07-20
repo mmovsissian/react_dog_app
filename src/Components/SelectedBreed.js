@@ -1,19 +1,20 @@
 import React from 'react';
+import { withRouter } from "react-router";
 
-export default class SelectedBreed extends React.Component {
+
+class SelectedBreed extends React.Component {
 
     state = {
         imageUrl: ''
     }
 
     componentDidMount() {
-        this.fetchUrl(this.props.breedName)
+        this.fetchUrl(this.props.match.params.breedNameAsd)
     }
 
-    componentDidUpdate(prev) {
-        if (prev.breedName != this.props.breedName) {
-            this.fetchUrl(this.props.breedName)
-        }
+    componentDidUpdate() {
+        this.fetchUrl(this.props.match.params.breedNameAsd)
+
     }
 
     async fetchUrl(urlbreedNameUrl) {
@@ -29,12 +30,12 @@ export default class SelectedBreed extends React.Component {
     render() {
         return (
             <>
-                {this.props.breedName && (
-                    <div>
-                        {this.state.imageUrl ? <img src={this.state.imageUrl} /> : <div>Loading...</div>}
-                    </div>
-                )}
+                <div>
+                    {this.state.imageUrl ? <img src={this.state.imageUrl} /> : <div>Loading...</div>}
+                </div>
             </>
         )
     }
-} 
+}
+
+export default withRouter(SelectedBreed)

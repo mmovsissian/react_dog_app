@@ -1,6 +1,8 @@
 import React from "react";
 import Breeds from "./Breeds";
 import SelectedBreed from "./SelectedBreed";
+import { Switch, Route } from "react-router-dom";
+import { withRouter } from "react-router";
 
 class Main extends React.Component {
 
@@ -30,16 +32,21 @@ class Main extends React.Component {
     render() {
         return (
             <div>
-                <div>Main</div>
                 <div style={{ display: 'flex' }}>
                     {this.state.isFetched ? <Breeds array={this.state.breeds} onBreedsClick={this.onBreedChange} /> : <div>Loading</div>}
-                    {this.state.selectedBreed && <SelectedBreed breedName={this.state.selectedBreed} />}
+                    <Switch>
+                        <Route exact path={this.props.match.path}>
+                            <div>Please select breed</div>
+                        </Route>
+                        <Route path={`${this.props.match.path}/:breedNameAsd`}>
+                            <SelectedBreed />
+                        </Route>
+                    </Switch>
                 </div>
-
             </div>
         )
     }
 
 }
 
-export default Main
+export default withRouter(Main)
